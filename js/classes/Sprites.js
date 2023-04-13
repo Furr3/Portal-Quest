@@ -9,6 +9,7 @@ class Sprite {
     this.loaded = false;
   }
 
+  //Draws the image on the canvas
   draw() {
     if (!this.loaded) return;
     c.drawImage(this.image, this.position.x, this.position.y);

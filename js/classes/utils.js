@@ -26,3 +26,5 @@ Array.prototype.createObjectsFrom2D = function () {
     });
   });
 };
+
+//Objects such as the base for collisionBlocks
