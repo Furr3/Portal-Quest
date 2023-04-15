@@ -1,5 +1,6 @@
-class Player {
-  constructor({ collisionBlocks = [] }) {
+class Player extends Sprite {
+  constructor({ collisionBlocks = [], imageSrc, frameRate }) {
+    super({ imageSrc, frameRate });
     this.position = {
       x: 200,
       y: 200,
@@ -10,8 +11,6 @@ class Player {
       y: 0,
     };
 
-    this.width = 25;
-    this.height = 25;
     this.sides = {
       bottom: this.position.y + this.height,
     };
@@ -20,14 +19,25 @@ class Player {
     this.collisionBlocks = collisionBlocks;
   }
 
-  draw() {
-    c.fillStyle = "red";
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
-  }
   update() {
-    this.position.x += this.velocity.x;
-    //checks for horizontal collisions
+    c.fillStyle = "rgba(0, 0, 255, 0)";
+    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    this.playerPositionUpdate();
 
+    this.checkForHorizontalCollisions();
+
+    this.checkForGravity();
+
+    this.checkForVerticalCollisions();
+
+    this.checkForAboveBottomOfCanvas();
+  }
+
+  playerPositionUpdate() {
+    this.position.x += this.velocity.x;
+  }
+  checkForHorizontalCollisions() {
+    //checks for horizontal collisions
     for (let i = 0; i < this.collisionBlocks.length; i++) {
       const collisionBlock = this.collisionBlocks[i];
 
@@ -51,10 +61,16 @@ class Player {
         }
       }
     }
+  }
+
+  checkForGravity() {
     //apply gravitation
     this.velocity.y += this.gravity;
     this.position.y += this.velocity.y;
     this.sides.bottom = this.position.y + this.height;
+  }
+
+  checkForVerticalCollisions() {
     //check for vertical collision
 
     for (let i = 0; i < this.collisionBlocks.length; i++) {
@@ -81,7 +97,9 @@ class Player {
         }
       }
     }
+  }
 
+  checkForAboveBottomOfCanvas() {
     //above bottom of canvas
     if (this.sides.bottom + this.velocity.y < canvas.height) {
     } else this.velocity.y = 0;
