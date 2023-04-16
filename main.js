@@ -1,12 +1,4 @@
-function menuClickBelow() {
-  // Handle clicks on menu links
-  let links = document.querySelectorAll("main a");
-  for (let i = 0; i < links.length; i++) {
-    links[i].addEventListener("click", function (event) {
-      event.preventDefault();
-      alert("Clicked " + this.textContent);
-    });
-  }
+function soundPlayer() {
   var source =
     "https://www.dropbox.com/s/1sla9b71deqd594/Y2Mate.is%20-%20Near%27s%20Theme%20%28A%29%20-%20Death%20Note-WJW_ldC7sUA-160k-1655490024216.mp3?dl=1";
   var audio = document.createElement("audio");
@@ -36,7 +28,7 @@ function menuClickBelow() {
   document.body.appendChild(volumeControl);
 }
 
-menuClickBelow();
+soundPlayer();
 //Extra Features Above
 ////////////////////////////////////////////////////////////////////////////////
 
