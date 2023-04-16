@@ -12,7 +12,7 @@ function soundPlayer() {
   audio.src = source;
 
   //Call dis to change the volume
-  audio.volume = 0.001;
+  audio.volume = 0.1;
   var volumeControl = document.createElement("input");
   volumeControl.type = "range";
   volumeControl.min = "0";
