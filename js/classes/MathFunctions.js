@@ -9,7 +9,7 @@ let mathResult = matte1.toString();
 //-------------------------
 
 //-------------------------
-
+//...
 console.log(Rotrandomizer + " Rotfrågan, Random rotfrågor");
 console.log(matte1 + " Roten ur RotFrågan");
 console.log(mathResult + " Resultatet i stringformat");
