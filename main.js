@@ -12,7 +12,7 @@ function soundPlayer() {
   audio.src = source;
 
   //Call dis to change the volume
-  audio.volume = 0.1;
+  audio.volume = 0;
   var volumeControl = document.createElement("input");
   volumeControl.type = "range";
   volumeControl.min = "0";
@@ -34,11 +34,16 @@ const c = canvas.getContext("2d");
 canvas.width = 64 * 16;
 canvas.height = 64 * 9;
 
+////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+
 let parsedCollisions;
 let collisionBlocks;
 let background;
 let doors;
 
+//Tagen från https://www.theodinproject.com/lessons/javascript-objects-and-object-constructors
 const player = new Player({
   imageSrc: "./img/Idle.png",
   frameRate: 11,
@@ -75,19 +80,8 @@ const player = new Player({
       imageSrc: "./img/enterDoor.png",
       onComplete: () => {
         console.log("completed Animation");
-        gsap.to(overlay, {
-          opacity: 1,
-          onComplete: () => {
-            level++;
-            if (level === 4) level = 1;
-            levels[level].init();
-            player.switchSprite("idleRight");
-            player.preventInput = false;
-            gsap.to(overlay, {
-              opacity: 0,
-            });
-          },
-        });
+
+        DoorMathOverlay();
       },
     },
   },
@@ -224,8 +218,7 @@ function animate() {
   background.draw();
 
   //collisionBlocks.forEach((CollisionBlock) => {
-  // CollisionBlock.draw();
-  //});
+  //CollisionBlock.draw();
 
   doors.forEach((door) => {
     door.draw();

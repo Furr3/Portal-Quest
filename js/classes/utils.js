@@ -1,3 +1,4 @@
+//Bakgrund, en tilemap data har 16 rows så du gör en for loop som går igenom varje row,
 Array.prototype.parse2D = function () {
   const rows = [];
   for (let i = 0; i < this.length; i += 16) {
@@ -6,6 +7,9 @@ Array.prototype.parse2D = function () {
 
   return rows;
 };
+
+//Denna code fick jag ta från nätet, och det gör att man kan parse'a varje siffra (data för collisionblock) en och en,
+//och därefter sätta dit en "kollisionblock" för den positionen där 292 ligger i en array.
 
 Array.prototype.createObjectsFrom2D = function () {
   const objects = [];

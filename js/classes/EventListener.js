@@ -1,6 +1,7 @@
 var runAudio1 = new Audio("./Sound/Running.mp3");
 var runAudio2 = new Audio("./Sound/Running.mp3");
 
+//Eventlistener har jag fått från google, vi hade inte lärt oss detta. Länk : https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
 window.addEventListener("keydown", (event) => {
   if (player.preventInput) return;
   switch (event.key) {

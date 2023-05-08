@@ -25,7 +25,7 @@ class Player extends Sprite {
 
     this.collisionBlocks = collisionBlocks;
   }
-
+  // för att göra att koden ser mer strukturerad ut har jag gjort en ny method för varje function.
   update() {
     this.checkForPlayerCollisionBox();
 
@@ -39,6 +39,7 @@ class Player extends Sprite {
 
     this.updateHitbox();
 
+    //Denna kod är för att visa collisionbox för player
     /*
     c.fillRect(
       this.hitbox.position.x,
@@ -49,7 +50,6 @@ class Player extends Sprite {
     */
 
     this.checkForVerticalCollisions();
-
     this.checkForAboveBottomOfCanvas();
   }
 
@@ -58,16 +58,17 @@ class Player extends Sprite {
     this.velocity.x = 0;
     if (keys.d.pressed) {
       this.switchSprite("runRight");
-      this.velocity.x = 3;
+      this.velocity.x = 6;
       this.lastDirection = "right";
     } else if (keys.a.pressed) {
       this.switchSprite("runLeft");
-      this.velocity.x = -3;
+      this.velocity.x = -6;
       this.lastDirection = "left";
     } else if (this.lastDirection === "left") {
       this.switchSprite("idleLeft");
     } else this.switchSprite("idleRight");
   }
+  //Kollade på 
   switchSprite(name) {
     if (this.image === this.animations[name].image) return;
     this.currentFrame = 0;
