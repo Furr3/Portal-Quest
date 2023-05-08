@@ -9,7 +9,6 @@ function soundPlayer() {
     audio.play();
   });
 
-  //Try to see if this works
   audio.src = source;
 
   //Call dis to change the volume
