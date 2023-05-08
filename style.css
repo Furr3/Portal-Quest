@@ -8,3 +8,47 @@ canvas {
 body {
   background-color: black;
 }
+
+#canvas-container {
+  position: relative;
+  top: 400px;
+  width: 500px;
+  height: 500px;
+  background-color: #333;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-name: fade-in;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.99;
+  }
+}
+
+#canvas-container #canvasBtn1,
+#canvas-container #canvasBtn2,
+#canvas-container #canvasBtn3,
+#canvas-container #canvasBtn4 {
+  position: relative;
+  font-size: large;
+  padding: 10px 20px;
+  background-color: #ff7f7f;
+  color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}

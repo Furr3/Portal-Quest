@@ -9,38 +9,39 @@ let mathResult = matte1.toString();
 //-------------------------
 
 //-------------------------
-//...
+
 console.log(Rotrandomizer + " Rotfrågan, Random rotfrågor");
 console.log(matte1 + " Roten ur RotFrågan");
 console.log(mathResult + " Resultatet i stringformat");
 
 function DoorMathOverlay() {
-  // Step 1: Create a new canvas element for the popup
-  const doorCanvas = document.createElement("canvas");
-  doorCanvas.height = 250;
-  doorCanvas.width = 300;
-  //yes
-  doorCanvas.style.position = "absolute";
-  doorCanvas.style.top = "50%";
-  doorCanvas.style.left = "50%";
-  doorCanvas.style.transform = "translate(-50%, -50%)";
-  doorCanvas.style.zIndex = "999";
+  myCanvas = document.getElementById("canvas1").getContext("2d");
+  canvasText = document.getElementById("canvasText").getContext("2d");
+  canvasMResult = document.getElementById("canvasMResult").getContext("2d");
 
-  const myCanvas = doorCanvas.getContext("2d");
-  myCanvas.fillStyle = "white";
-  myCanvas.fillRect(0, 0, doorCanvas.width, doorCanvas.height);
-  myCanvas.fillStyle = "black";
-  myCanvas.font = "20px Arial";
-  myCanvas.textBaseline = "top";
-  myCanvas.fillText("Vad är roten ur: " + Rotrandomizer, 65, 10, 500);
+  canvasMResult.font = "40px Times Roman";
+  canvasMResult.fillStyle = "#516";
+  canvasMResult.fillText(Rotrandomizer + " ?", 380, 152, 300);
 
-  doorCanvas.addEventListener("click", handleClick);
+  canvasText.fillStyle = "#FF3";
 
-  function handleClick(event) {}
+  canvasText.font = "40px Times Roman";
+  canvasText.fillText("Vad är roten ur: ", 100, 150, 300);
 
-  document.body.appendChild(doorCanvas);
+  canvasText.font = "40px Times Roman";
+  // Get the button element
+  const button = document.getElementById("canvasBtn4");
 
-  function goToDoor() {
+  // Add an event listener to the button
+  button.addEventListener("click", questionFour);
+
+  // Button click event handler
+  function questionFour() {
+    console.log("Button clicked");
+    // Handle button click event here
+  }
+
+  function goToNextRoom() {
     //Initalized if function is called
     gsap.to(overlay, {
       opacity: 1,
