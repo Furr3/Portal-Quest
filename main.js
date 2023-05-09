@@ -36,6 +36,8 @@ canvas.height = 64 * 9;
 
 ////////////////////////////////////////////////////////////////////////////////
 
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 let parsedCollisions;
@@ -81,11 +83,13 @@ const player = new Player({
       onComplete: () => {
         console.log("completed Animation");
 
-        DoorMathOverlay();
+        divBlock.style.opacity = "1";
+        isClicked = false;
       },
     },
   },
 });
+
 let level = 1;
 let levels = {
   1: {

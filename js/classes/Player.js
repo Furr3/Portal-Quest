@@ -68,7 +68,7 @@ class Player extends Sprite {
       this.switchSprite("idleLeft");
     } else this.switchSprite("idleRight");
   }
-  //Kollade på 
+  //Kollade på
   switchSprite(name) {
     if (this.image === this.animations[name].image) return;
     this.currentFrame = 0;
