@@ -36,8 +36,6 @@ canvas.height = 64 * 9;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
 ///////////////////////////////////////////////////////////////////////////////
 
 let parsedCollisions;
@@ -82,7 +80,7 @@ const player = new Player({
       imageSrc: "./img/enterDoor.png",
       onComplete: () => {
         console.log("completed Animation");
-
+        opacityBlock.style.opacity = "1";
         divBlock.style.opacity = "1";
         isClicked = false;
       },

@@ -26,10 +26,10 @@ body {
   transform: translate(-50%, -50%);
 }
 
-#canvas-container #canvasBtn1,
-#canvas-container #canvasBtn2,
-#canvas-container #canvasBtn3,
-#canvas-container #canvasBtn4 {
+#canvasBtn1,
+#canvasBtn2,
+#canvasBtn3,
+#canvasBtn4 {
   position: relative;
   font-size: large;
   padding: 10px 20px;

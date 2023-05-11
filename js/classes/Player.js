@@ -58,11 +58,11 @@ class Player extends Sprite {
     this.velocity.x = 0;
     if (keys.d.pressed) {
       this.switchSprite("runRight");
-      this.velocity.x = 6;
+      this.velocity.x = 4;
       this.lastDirection = "right";
     } else if (keys.a.pressed) {
       this.switchSprite("runLeft");
-      this.velocity.x = -6;
+      this.velocity.x = -4;
       this.lastDirection = "left";
     } else if (this.lastDirection === "left") {
       this.switchSprite("idleLeft");
