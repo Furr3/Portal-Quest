@@ -9,12 +9,16 @@
     <div>
       <canvas></canvas>
     </div>
+
     <div class="overlay"></div>
     <div id="canvas-container">
       <canvas id="canvas1"></canvas>
       <canvas id="canvasText" width="500" height="500"></canvas>
       <canvas id="canvasMResult" width="500" height="500"></canvas>
       <div>
+        <p>Score:<span id="score">0</span></p>
+        <p>Highscore: <span id="highscore">0</span></p>
+
         <button id="canvasBtn1" onclick="questionOne()">Answer</button>
         <button id="canvasBtn2" onclick="questionTwo()">Answer</button>
         <button id="canvasBtn3" onclick="questionThree()">Answer</button>
@@ -34,12 +38,12 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   ></script>
-  <script src="js/classes/utils.js"></script>
+  <script src="js/classes/Parseblock.js"></script>
   <script src="js/classes/Data/Collisions.js"></script>
   <script src="js/classes/CollisionBlock.js"></script>
   <script src="js/classes/Sprites.js"></script>
   <script src="js/classes/Player.js"></script>
-  <script src="js/classes/EventListener.js"></script>
+  <script src="js/classes/Btn.js"></script>
   <script src="js/classes/MathFunctions.js"></script>
-  <script src="main.js"></script>
+  <script src="js/classes/main.js"></script>
 </html>

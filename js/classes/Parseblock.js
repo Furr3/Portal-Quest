@@ -1,4 +1,4 @@
-//Bakgrund, en tilemap data har 16 rows så du gör en for loop som går igenom varje row,
+//För att få fram information om hur kollisionblocket ska vara, en tilemap data har 16 rows så du gör en for loop som går igenom varje row,
 Array.prototype.parse2D = function () {
   const rows = [];
   for (let i = 0; i < this.length; i += 16) {

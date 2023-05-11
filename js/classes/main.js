@@ -12,7 +12,7 @@ function soundPlayer() {
   audio.src = source;
 
   //Call dis to change the volume
-  audio.volume = 0;
+  audio.volume = 0.01;
   var volumeControl = document.createElement("input");
   volumeControl.type = "range";
   volumeControl.min = "0";
@@ -35,8 +35,6 @@ canvas.width = 64 * 16;
 canvas.height = 64 * 9;
 
 ////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////
 
 let parsedCollisions;
 let collisionBlocks;
@@ -192,9 +190,6 @@ let levels = {
   },
 };
 
-// x-koordinat 804,00 för dörr
-//y-koordinat 385,00 för dörr
-
 const keys = {
   w: {
     pressed: false,
@@ -208,7 +203,6 @@ const keys = {
     pressed: false,
   },
 };
-//let bottom = y + 100;
 
 const overlay = {
   opacity: 0,
@@ -218,9 +212,6 @@ function animate() {
   window.requestAnimationFrame(animate);
 
   background.draw();
-
-  //collisionBlocks.forEach((CollisionBlock) => {
-  //CollisionBlock.draw();
 
   doors.forEach((door) => {
     door.draw();

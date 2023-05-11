@@ -1,3 +1,4 @@
+//Hur man gör
 class Player extends Sprite {
   constructor({
     collisionBlocks = [],

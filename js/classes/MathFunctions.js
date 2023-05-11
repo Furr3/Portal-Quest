@@ -11,6 +11,34 @@ let eqNumb1;
 let divisionResult;
 let x;
 
+let score = 0;
+let highscore = 0;
+
+const scoreElement = document.getElementById("score");
+const highscoreElement = document.getElementById("highscore");
+
+function updateScore() {
+  scoreElement.textContent = score;
+  highscoreElement.textContent = highscore;
+}
+
+function increaseScore() {
+  score++;
+  updateScore();
+}
+
+function resetScore() {
+  score = 0;
+  updateScore();
+}
+
+function updateHighscore() {
+  if (score > highscore) {
+    highscore = score;
+    updateScore();
+  }
+}
+
 function resetValues() {
   //Vad är roten ur 64 t.ex -rot frågor-
   Rotrandomizer = Math.round(Math.random() * Math.PI * 10);
@@ -39,14 +67,14 @@ function resetValues() {
   );
 
   canvasMResult.font = "40px Times Roman";
-  canvasMResult.fillStyle = "#516";
+  canvasMResult.fillStyle = "#FFC0CB";
   canvasText.fillStyle = "#FF3";
   canvasText.font = "35px Times Roman";
   canvasText.fillText("Vad är roten ur: ", 70, 150, 400);
   canvasText.fillText("?", 390, 150, 300);
   canvasMResult.fillText("√ " + Rotrandomizer, 300, 150, 300);
   canvasMResult.font = "15px Times Roman";
-  //-------------------------
+  //------------------------------------------------------------------------------
 
   let answer1 = document.getElementById("canvasBtn1").value;
   let answer2 = document.getElementById("canvasBtn2").value;
@@ -78,6 +106,9 @@ function resetValues() {
 }
 
 /*
+---------------------------------------------------------------------
+Försökte lägga in nya frågor och svar såsom algebra men hade inte tid
+---------------------------------------------------------------------
 function newValues() {
   //If let's say 100x = 50, then we divide and do 50/100 to get x
 
@@ -158,9 +189,17 @@ function newValues() {
 
 function questionOne() {
   if (answerText1.innerHTML === "≈ " + randomItem.toString()) {
+    var audio8 = new Audio("./Sound/CompleteSound.mp3");
+    audio8.play();
     divBlock.style.opacity = "0";
+    increaseScore();
+    updateHighscore();
+
     DoorMathOverlay();
   } else if (answerText1.innerHTML != "≈ " + randomItem.toString()) {
+    var audio1 = new Audio("./Sound/ErrorWindows.mp3");
+    audio1.play();
+    resetScore();
     console.log("Error, wrong btn.");
   }
 }
@@ -168,8 +207,16 @@ function questionOne() {
 function questionTwo() {
   if (answerText2.innerHTML === "≈ " + randomItem.toString()) {
     divBlock.style.opacity = "0";
+    var audio8 = new Audio("./Sound/CompleteSound.mp3");
+    audio8.play();
+    increaseScore();
+    updateHighscore();
+
     DoorMathOverlay();
   } else {
+    var audio1 = new Audio("./Sound/ErrorWindows.mp3");
+    audio1.play();
+    resetScore();
     console.log("Error, wrong btn.");
   }
 }
@@ -177,8 +224,16 @@ function questionTwo() {
 function questionThree() {
   if (answerText3.innerHTML === "≈ " + randomItem.toString()) {
     divBlock.style.opacity = "0";
+    var audio8 = new Audio("./Sound/CompleteSound.mp3");
+    audio8.play();
+    increaseScore();
+    updateHighscore();
+
     DoorMathOverlay();
   } else {
+    var audio1 = new Audio("./Sound/ErrorWindows.mp3");
+    audio1.play();
+    resetScore();
     console.log("Error, wrong btn.");
   }
 }
@@ -186,15 +241,23 @@ function questionThree() {
 function questionFour() {
   if (answerText4.innerHTML === "≈ " + randomItem.toString()) {
     divBlock.style.opacity = "0";
+    var audio8 = new Audio("./Sound/CompleteSound.mp3");
+    audio8.play();
+    increaseScore();
+    updateHighscore();
+
     DoorMathOverlay();
   } else {
+    var audio1 = new Audio("./Sound/ErrorWindows.mp3");
+    audio1.play();
+    resetScore();
     console.log("Error, wrong btn.");
   }
 }
 //-------------------------
 
 function DoorMathOverlay() {
-  resetValues(); // Reset the values before moving to the next room)
+  resetValues(); // Reset le values before moving to the next room)
 
   function goToNextRoom() {
     // Initialize if function is called
