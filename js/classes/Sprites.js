@@ -1,5 +1,5 @@
 
-//
+//<
 class Sprite {
   constructor({
     position,
@@ -36,8 +36,7 @@ class Sprite {
       }
     }
   }
-
-  //Draws the image on the canvas
+  
   draw() {
     if (!this.loaded) return;
     const cropbox = {
@@ -87,3 +86,4 @@ class Sprite {
     }
   }
 }
+//>

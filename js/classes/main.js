@@ -1,3 +1,5 @@
+//Markeringar sådana som < till > innebär att jag har använt den från en källa (Alla källor ligger i index.html)
+
 function soundPlayer() {
   var source =
     "https://www.dropbox.com/s/1sla9b71deqd594/Y2Mate.is%20-%20Near%27s%20Theme%20%28A%29%20-%20Death%20Note-WJW_ldC7sUA-160k-1655490024216.mp3?dl=1";
@@ -26,6 +28,7 @@ function soundPlayer() {
 }
 
 soundPlayer();
+
 //Extra Features Above
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -34,14 +37,12 @@ const c = canvas.getContext("2d");
 canvas.width = 64 * 16;
 canvas.height = 64 * 9;
 
-////////////////////////////////////////////////////////////////////////////////
-
 let parsedCollisions;
 let collisionBlocks;
 let background;
 let doors;
 
-//Tagen från https://www.theodinproject.com/lessons/javascript-objects-and-object-constructors
+//<
 const player = new Player({
   imageSrc: "./img/Idle.png",
   frameRate: 11,
@@ -54,7 +55,7 @@ const player = new Player({
     },
     idleLeft: {
       frameRate: 11,
-      frameBuffer: 15,
+      frameBuffer: 5,
       loop: true,
       imageSrc: "./img/IdleLeft.png",
     },
@@ -85,6 +86,7 @@ const player = new Player({
     },
   },
 });
+//>
 
 let level = 1;
 let levels = {
@@ -122,6 +124,7 @@ let levels = {
     },
   },
 
+  //Level 2, same values as previously, det är bara en ny mapp och ny dörr position som påbörjas (Lev2.png)
   2: {
     init: () => {
       parsedCollisions = collData2.parse2D();
@@ -156,6 +159,7 @@ let levels = {
     },
   },
 
+  //Level 3, same values as previously, det är bara en ny mapp och ny dörr position som påbörjas (Lev2.png)
   3: {
     init: () => {
       parsedCollisions = collData3.parse2D();
@@ -190,32 +194,20 @@ let levels = {
   },
 };
 
-const keys = {
-  w: {
-    pressed: false,
-  },
-
-  a: {
-    pressed: false,
-  },
-
-  d: {
-    pressed: false,
-  },
-};
-
 const overlay = {
   opacity: 0,
 };
 
+
 function animate() {
+  //<
   window.requestAnimationFrame(animate);
-
   background.draw();
-
   doors.forEach((door) => {
     door.draw();
   });
+  //>
+
 
   player.handleInput(keys);
   player.update();
@@ -227,5 +219,6 @@ function animate() {
   c.fillRect(0, 0, canvas.width, canvas.height);
   c.restore();
 }
+//Påbörjar en ny level, och ropar på init
 levels[level].init();
 animate();

@@ -1,4 +1,6 @@
-//Hur man gör
+//Markeringar sådana som < till > innebär att jag har använt den från en källa (Alla källor ligger i index.html)
+
+//<
 class Player extends Sprite {
   constructor({
     collisionBlocks = [],
@@ -7,69 +9,64 @@ class Player extends Sprite {
     animations,
     frameBuffer,
     loop,
+    
   }) {
     super({ imageSrc, frameRate, animations, frameBuffer, loop });
-    this.position = {
-      x: 200,
-      y: 200,
-    };
-
-    this.velocity = {
-      x: 0,
-      y: 0,
-    };
-
-    this.sides = {
-      bottom: this.position.y + this.height,
-    };
+    //>
+    this.position = { x: 200, y: 200 };
+    this.velocity = { x: 0, y: 0 };
     this.gravity = 0.35;
-
     this.collisionBlocks = collisionBlocks;
+    this.UnderPlayer();
   }
-  // för att göra att koden ser mer strukturerad ut har jag gjort en ny method för varje function.
+
+  UnderPlayer() {
+    this.sides = { bottom: this.position.y + this.height };
+  }
+
+  //Gjort all code till methods för att enkelt ropa på de från vart jag vill om jag skulle vilja uppdatera spelet i framtiden.
   update() {
-    this.checkForPlayerCollisionBox();
+    this.PlayerkollisionTest();
 
-    this.playerPositionUpdate();
-
-    this.updateHitbox();
-
-    this.checkForHorizontalCollisions();
-
-    this.checkForGravity();
+    this.UppdateraPos();
 
     this.updateHitbox();
 
-    //Denna kod är för att visa collisionbox för player
-    /*
-    c.fillRect(
-      this.hitbox.position.x,
-      this.hitbox.position.y,
-      this.hitbox.width,
-      this.hitbox.height
-    );
-    */
+    this.HorizontalKoll();
 
-    this.checkForVerticalCollisions();
-    this.checkForAboveBottomOfCanvas();
+    this.Gravity();
+
+    this.updateHitbox();
+
+    this.VerticalKoll();
+
+    this.checkCanvas();
   }
 
-  handleInput(keys) {
+  handleInput() {
     if (this.preventInput) return;
-    this.velocity.x = 0;
+
     if (keys.d.pressed) {
-      this.switchSprite("runRight");
-      this.velocity.x = 4;
-      this.lastDirection = "right";
+      this.setMovement("runRight", 4, "right");
     } else if (keys.a.pressed) {
-      this.switchSprite("runLeft");
-      this.velocity.x = -4;
-      this.lastDirection = "left";
-    } else if (this.lastDirection === "left") {
-      this.switchSprite("idleLeft");
-    } else this.switchSprite("idleRight");
+      this.setMovement("runLeft", -4, "left");
+    } else {
+      this.setMovement(
+        this.lastDirection === "left" ? "idleLeft" : "idleRight",
+        0
+      );
+    }
   }
-  //Kollade på
+
+  //<
+  setMovement(sprite, velocityX, direction) {
+    this.switchSprite(sprite);
+    this.velocity.x = velocityX;
+    this.lastDirection = direction;
+  }
+  //>
+
+  //<
   switchSprite(name) {
     if (this.image === this.animations[name].image) return;
     this.currentFrame = 0;
@@ -79,94 +76,76 @@ class Player extends Sprite {
     this.loop = this.animations[name].loop;
     this.currentAnimation = this.animations[name];
   }
+  //>
+
+  //<
   updateHitbox() {
+    const { x, y } = this.position;
+
     this.hitbox = {
       position: {
-        x: this.position.x + 60,
-        y: this.position.y + 34,
+        x: x + 60,
+        y: y + 34,
       },
       width: 50,
       height: 53,
     };
   }
+  //>
 
-  checkForPlayerCollisionBox() {
+  //För att se vart player kan ungefär
+  PlayerkollisionTest() {
     //c.fillStyle = "rgba(0, 0, 255, 1)";
     //c.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
-  playerPositionUpdate() {
+
+  UppdateraPos() {
     this.position.x += this.velocity.x;
   }
-  checkForHorizontalCollisions() {
-    //checks for horizontal collisions
-    for (let i = 0; i < this.collisionBlocks.length; i++) {
-      const collisionBlock = this.collisionBlocks[i];
 
-      //if collision exists
-      if (
-        this.hitbox.position.x <=
-          collisionBlock.position.x + collisionBlock.width &&
-        this.hitbox.position.x + this.hitbox.width >=
-          collisionBlock.position.x &&
-        this.hitbox.position.y + this.hitbox.height >=
-          collisionBlock.position.y &&
-        this.hitbox.position.y <=
-          collisionBlock.position.y + collisionBlock.height
+  HorizontalKoll() {
+    for (const collisionBlock of this.collisionBlocks) {
+      if (this.hitbox.position.x <= collisionBlock.position.x + collisionBlock.width &&
+        this.hitbox.position.x + this.hitbox.width >= collisionBlock.position.x &&
+        this.hitbox.position.y + this.hitbox.height >= collisionBlock.position.y &&
+        this.hitbox.position.y <= collisionBlock.position.y + collisionBlock.height
       ) {
-        //collision on x axis till vänster sida av väggen
-        if (this.velocity.x < -0) {
-          const offset = this.hitbox.position.x - this.position.x;
-          this.position.x =
-            collisionBlock.position.x + collisionBlock.width - offset + 0.01;
-          break;
-        }
-
-        if (this.velocity.x > 0) {
-          const offset =
-            this.hitbox.position.x - this.position.x + this.hitbox.width;
-          this.position.x = collisionBlock.position.x - offset - 0.01;
-          break;
-        }
+        const offset =
+          //? är samma som en if sats utan en else, och det är mycket enklare och kompakt att ge instruktioner då den kan ge dig t.ex (x)? true value eller : false value
+          this.velocity.x < 0 ? this.hitbox.position.x - this.position.x : this.hitbox.position.x - this.position.x + this.hitbox.width; this.position.x =
+          this.velocity.x < 0 ? collisionBlock.position.x + collisionBlock.width - offset + 0.01 : collisionBlock.position.x - offset - 0.01;
+        break;
       }
     }
   }
-
-  checkForGravity() {
-    //apply gravitation
-    this.velocity.y += this.gravity;
+  //Tyngdacceleration = 0.3, accelererar neråt för varje frame
+  Gravity() {
+    const gravityAcceleration = 0.3;
+    this.velocity.y += gravityAcceleration;
     this.position.y += this.velocity.y;
     this.sides.bottom = this.position.y + this.height;
   }
 
-  checkForVerticalCollisions() {
-    //check for vertical collision
-
+  VerticalKoll() {
     for (let i = 0; i < this.collisionBlocks.length; i++) {
       const collisionBlock = this.collisionBlocks[i];
 
-      //if collision exists
       if (
-        this.hitbox.position.x <=
-          collisionBlock.position.x + collisionBlock.width &&
-        this.hitbox.position.x + this.hitbox.width >=
-          collisionBlock.position.x &&
-        this.hitbox.position.y + this.hitbox.height >=
-          collisionBlock.position.y &&
-        this.hitbox.position.y <=
-          collisionBlock.position.y + collisionBlock.height
+        this.hitbox.position.x <= collisionBlock.position.x + collisionBlock.width &&
+        this.hitbox.position.x + this.hitbox.width >= collisionBlock.position.x &&
+        this.hitbox.position.y + this.hitbox.height >= collisionBlock.position.y &&
+        this.hitbox.position.y <= collisionBlock.position.y + collisionBlock.height
       ) {
         if (this.velocity.y < 0) {
           this.velocity.y = 0;
           const offset = this.hitbox.position.y - this.position.y;
-          this.position.y =
-            collisionBlock.position.y + collisionBlock.height - offset + 0.01;
+          this.position.y = collisionBlock.position.y + collisionBlock.height - offset + 0.01;
           break;
         }
 
         if (this.velocity.y > 0) {
           this.velocity.y = 0;
-          const offset =
-            this.hitbox.position.y - this.position.y + this.hitbox.height;
+          const offset = this.hitbox.position.y - this.position.y + this.hitbox.height;
           this.position.y = collisionBlock.position.y - offset - 0.01;
           break;
         }
@@ -174,9 +153,11 @@ class Player extends Sprite {
     }
   }
 
-  checkForAboveBottomOfCanvas() {
-    //above bottom of canvas
+  //<
+  checkCanvas() {
+    //Ser till om spelarens hastighet + spelarens längd på bredden är mindre än canvas height, annars sätt hastighet i y led till 0.
     if (this.sides.bottom + this.velocity.y < canvas.height) {
     } else this.velocity.y = 0;
   }
+  //>
 }

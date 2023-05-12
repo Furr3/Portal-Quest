@@ -1,15 +1,24 @@
-//Här ligger alla matte grejer, frågor etc och sen om mattematiken blir rätt från user så initialiseras resten av spelet, osv.
-let Rotrandomizer, matte1, mathResult;
-let answerText1, answerText2, answerText3, answerText4;
-let randomItem, randomText;
+//Markeringar sådana som < till > innebär att jag har använt den från en källa (Alla källor ligger i index.html)
 
-let newAnswerText1, newAnswerText2, newAnswerText3, newAnswerText4;
-let newRandomItem, newRandomText;
-
-let eqX;
-let eqNumb1;
-let divisionResult;
-let x;
+//Här ligger alla matte grejer, frågor etc och sen om mattematiken blir rätt från user så initialiseras  resten och spelet fortsätter. Annars pausas hela spelet.
+let Rotrandomizer,
+  matte1,
+  mathResult,
+  answerText1,
+  answerText2,
+  answerText3,
+  answerText4,
+  randomItem,
+  randomText,
+  newAnswerText1,
+  newAnswerText2,
+  newAnswerText3,
+  newAnswerText4,
+  newRandomItem,
+  newRandomText,
+  eqNumb1,
+  divisionResult,
+  x;
 
 let score = 0;
 let highscore = 0;
@@ -107,7 +116,7 @@ function resetValues() {
 
 /*
 ---------------------------------------------------------------------
-Försökte lägga in nya frågor och svar såsom algebra men hade inte tid
+La in nya frågor och svar såsom algebra men hade inte tid
 ---------------------------------------------------------------------
 function newValues() {
   //If let's say 100x = 50, then we divide and do 50/100 to get x
@@ -261,6 +270,12 @@ function DoorMathOverlay() {
 
   function goToNextRoom() {
     // Initialize if function is called
+
+    //Tagen från yt, då killen visar hur man kan initialize'a en ny level.
+    //<
+
+    //gsap.to(overlay är bara en library som gör att man kan göra overlays som rör sig från 0 till 1, (animerande))
+    //Till exempel när man byter mapp,
     gsap.to(overlay, {
       opacity: 1,
       onComplete: () => {
@@ -275,6 +290,7 @@ function DoorMathOverlay() {
       },
     });
   }
+  //>
 
   goToNextRoom();
 }

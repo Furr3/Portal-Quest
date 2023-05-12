@@ -1,3 +1,16 @@
+//Använd program (TILED) (Pixel art & Map Maker)
+
+//Hur går det till?
+
+/* 
+  Jo. Inom TILED finns det något som kallas för Collision implementation och detta lägger till collisionblock där du placerar den, den är 64x64 (lika stor som per ruta i spelet)
+  När man lägger ut dessa block genereras något som kallas collisionData och man kan få ut dess informationen genom att spara (mappens fil som en .js file,
+   och bara gå in i filen och ta ut alla värden. Blocket har ett värde på 292 och varje ställe i koden där det finns 292 innebär en position. I varje position med hjälp av att parse'a allt
+   i en array ger det oss en kollisionblock
+*/
+
+
+
 const collData = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 292, 292, 292, 292, 292, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   292, 292, 292, 0, 0, 0, 292, 0, 0, 0, 292, 292, 292, 292, 292, 292, 292, 250,
@@ -32,5 +45,5 @@ const collData3 = [
   292, 292, 292, 292, 292, 292, 292, 292, 292, 292,
 ];
 
-//Man kan lägga till hur många banor man vill, 
+//Man kan lägga till hur många banor man vill,
 //292 står för varje kollisionblock siffran eller positionen, sen parsar man ut en ny collisionblock där varje siffra (292's position)
